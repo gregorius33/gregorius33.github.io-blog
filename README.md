@@ -96,23 +96,26 @@ git push
 
 블로그·문서·랜딩 페이지 같은 콘텐츠 사이트에서는 Astro 같은 SSG를 쓰는 패턴이 일반적입니다.
 
+- CSR (Client Side Rendering), SSR (Server Side Rendering), SSG (Static Site Generation)  
+- SEO (Search Engine Optimization, 검색 엔진 최적화)
+
 ## [참고] Custom domain 설정
 
 gitHub/Vercel에서 Custom domain 연결 가능하고 설정도 어렵지 않습니다.
 
-## **GitHub Pages + 커스텀 도메인**
+### **GitHub Pages + 커스텀 도메인**
 
 1. 저장소 **Settings** → **Pages** → **Custom domain**에 도메인 입력 (예: `blog.example.com`)
 2. 도메인 등록업체(DNS)에서 **CNAME** 또는 **A 레코드** 설정
 3. HTTPS는 GitHub가 자동으로 발급
 
-## **Vercel + 커스텀 도메인**
+### **Vercel + 커스텀 도메인**
 
 1. Vercel 프로젝트 **Settings** → **Domains** → 도메인 추가
 2. 안내에 따라 DNS에 **CNAME** 또는 **A 레코드** 추가
 3. HTTPS 자동 발급
 
-## **난이도**
+### **난이도**
 
 
 | **항목**          | **난이도**             |
@@ -122,7 +125,7 @@ gitHub/Vercel에서 Custom domain 연결 가능하고 설정도 어렵지 않습
 | DNS 설정          | ⭐⭐ 보통 (업체마다 화면만 다름) |
 
 
-## **DNS 설정 예시**
+### **DNS 설정 예시**
 
 - **서브도메인** (`blog.example.com`): CNAME → `username.github.io` 또는 `cname.vercel-dns.com`
 - **루트 도메인** (`example.com`): A 레코드 → GitHub/Vercel이 안내하는 IP 주소 사용
