@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'blog'>;
+}
+
+const { entry } = Astro.props;
+const { id, data } = entry;
+const { title, description, pubDate, tags, category } = data;
+const base = import.meta.env.BASE_URL;
+const postUrl = `${base}blog/${id}/`;
+const formattedDate = new Intl.DateTimeFormat('ko-KR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(pubDate);
+---
+
+<article class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 hover:shadow-lg hover:border-slate-200 transition-all duration-200">
+  <a href={postUrl} class="block group">
+    <span class="text-sm text-slate-500 font-medium">{category}</span>
+    <h2 class="mt-2 text-xl font-semibold text-slate-800 group-hover:text-slate-600 transition-colors">
+      {title}
+    </h2>
+    <time class="block mt-1 text-sm text-slate-500" datetime={pubDate.toISOString()}>
+      {formattedDate}
+    </time>
+    <p class="mt-3 text-slate-600 line-clamp-2">
+      {description}
+    </p>
+    {tags.length > 0 && (
+      <ul class="mt-4 flex flex-wrap gap-2">
+        {tags.map((tag) => (
+          <li>
+            <a
+              href={`${base}blog/tag/${encodeURIComponent(tag)}/`}
+              class="text-xs px-2 py-1 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors"
+            >
+              {tag}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </a>
+</article>

@@ -1,0 +1,95 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const base = import.meta.env.BASE_URL;
+const allPosts = (await getCollection('blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// 월별 그룹
+const byMonth = allPosts.reduce<Record<string, typeof allPosts>>((acc, post) => {
+  const d = post.data.pubDate;
+  const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+  if (!acc[key]) acc[key] = [];
+  acc[key].push(post);
+  return acc;
+}, {});
+
+const months = Object.keys(byMonth).sort().reverse();
+
+// 태그 목록
+const allTags = [...new Set(allPosts.flatMap((p) => p.data.tags))].sort();
+
+// 카테고리 목록
+const allCategories = [...new Set(allPosts.map((p) => p.data.category))].sort();
+---
+
+<Layout title="Blog - My Blog" description="블로그 포스트 목록입니다.">
+  <div class="max-w-6xl mx-auto px-4 py-12">
+    <div class="flex flex-col lg:flex-row gap-12">
+      <aside class="lg:w-64 shrink-0">
+        <div class="sticky top-24 space-y-8">
+          <section>
+            <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3">월별 아카이브</h3>
+            <ul class="space-y-2">
+              {months.map((key) => {
+                const [y, m] = key.split('-');
+                const label = `${y}년 ${parseInt(m)}월`;
+                return (
+                  <li>
+                    <a
+                      href={`${base}blog/archive/${y}/${m}/`}
+                      class="text-slate-600 hover:text-slate-900 transition-colors"
+                    >
+                      {label} ({byMonth[key].length})
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+          <section>
+            <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3">태그</h3>
+            <div class="flex flex-wrap gap-2">
+              {allTags.map((tag) => (
+                <a
+                  href={`${base}blog/tag/${encodeURIComponent(tag)}/`}
+                  class="text-xs px-2 py-1 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors"
+                >
+                  {tag}
+                </a>
+              ))}
+            </div>
+          </section>
+          <section>
+            <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3">카테고리</h3>
+            <ul class="space-y-2">
+              {allCategories.map((cat) => (
+                <li>
+                  <a
+                    href={`${base}blog/category/${encodeURIComponent(cat)}/`}
+                    class="text-slate-600 hover:text-slate-900 transition-colors"
+                  >
+                    {cat}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
+      </aside>
+      <div class="flex-1 min-w-0">
+        <h1 class="text-3xl font-bold text-slate-800 mb-8">모든 포스트</h1>
+        <div class="grid gap-6 md:grid-cols-2">
+          {allPosts.map((entry) => (
+            <BlogCard entry={entry} />
+          ))}
+        </div>
+        {allPosts.length === 0 && (
+          <p class="text-slate-500">아직 작성된 포스트가 없습니다.</p>
+        )}
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,51 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import BlogCard from '../../../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const keys = new Set<string>();
+  posts.forEach((p) => {
+    const d = p.data.pubDate;
+    keys.add(`${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, '0')}`);
+  });
+  return [...keys].map((key) => {
+    const [year, month] = key.split('/');
+    return { params: { year, month } };
+  });
+}
+
+const { year, month } = Astro.params;
+const base = import.meta.env.BASE_URL;
+const yearNum = parseInt(year!);
+const monthNum = parseInt(month!);
+
+const posts = (await getCollection('blog'))
+  .filter((p) => {
+    const d = p.data.pubDate;
+    return d.getFullYear() === yearNum && d.getMonth() + 1 === monthNum;
+  })
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const monthLabel = `${year}년 ${monthNum}월`;
+---
+
+<Layout title={`${monthLabel} 아카이브 - My Blog`} description={`${monthLabel}에 작성된 포스트`}>
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <p class="text-slate-500 mb-6">
+      <a href={`${base}blog/`} class="hover:text-slate-700">Blog</a>
+      <span class="mx-2">/</span>
+      <span class="font-medium text-slate-800">{monthLabel}</span>
+    </p>
+    <h1 class="text-3xl font-bold text-slate-800 mb-8">{monthLabel} 아카이브</h1>
+    <div class="grid gap-6 md:grid-cols-2">
+      {posts.map((entry) => (
+        <BlogCard entry={entry} />
+      ))}
+    </div>
+    {posts.length === 0 && (
+      <p class="text-slate-500">이 기간에 작성된 포스트가 없습니다.</p>
+    )}
+  </div>
+</Layout>

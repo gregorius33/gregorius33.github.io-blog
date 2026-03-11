@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="About - My Blog" description="블로그 소개 페이지입니다.">
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold text-slate-800 mb-6">About</h1>
+    <div class="prose prose-slate max-w-none">
+      <p class="text-lg text-slate-600 leading-relaxed">
+        Astro 기반 정적 블로그입니다.
+      </p>
+      <p class="text-slate-600 leading-relaxed mt-4">
+        마크다운으로 글을 작성하고, 태그와 카테고리로 분류할 수 있습니다.
+        월별 아카이브로 포스트를 관리하며, GitHub Pages에 호스팅됩니다.
+      </p>
+      <h2 class="text-2xl font-semibold text-slate-800 mt-8 mb-4">기능</h2>
+      <ul class="list-disc list-inside text-slate-600 space-y-2">
+        <li>정적 페이지 빌드 (GitHub Pages 호스팅)</li>
+        <li>마크다운 글 작성 및 렌더링</li>
+        <li>Home, About, Blog 메뉴</li>
+        <li>월별 포스트 관리</li>
+        <li>태그 및 카테고리 분류</li>
+      </ul>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { entry: post },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const { title, description, pubDate, tags, category } = entry.data;
+const base = import.meta.env.BASE_URL;
+const formattedDate = new Intl.DateTimeFormat('ko-KR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(pubDate);
+---
+
+<Layout title={`${title} - My Blog`} description={description}>
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <header class="mb-8">
+      <span class="text-sm font-medium text-slate-500">{category}</span>
+      <h1 class="mt-2 text-4xl font-bold text-slate-800">{title}</h1>
+      <time class="block mt-2 text-slate-500" datetime={pubDate.toISOString()}>
+        {formattedDate}
+      </time>
+      {tags.length > 0 && (
+        <ul class="mt-4 flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <li>
+              <a
+                href={`${base}blog/tag/${encodeURIComponent(tag)}/`}
+                class="text-xs px-2 py-1 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors"
+              >
+                {tag}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </header>
+    <div class="prose prose-slate prose-lg max-w-none">
+      <Content />
+    </div>
+    <footer class="mt-12 pt-8 border-t border-slate-200">
+      <a href={`${base}blog/`} class="text-slate-600 hover:text-slate-900 font-medium">
+        ← 목록으로
+      </a>
+    </footer>
+  </article>
+</Layout>

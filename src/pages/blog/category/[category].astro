@@ -1,0 +1,38 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import BlogCard from '../../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const categories = [...new Set(posts.map((p) => p.data.category))];
+  return categories.map((category) => ({
+    params: { category },
+  }));
+}
+
+const { category } = Astro.params;
+const base = import.meta.env.BASE_URL;
+const posts = (await getCollection('blog'))
+  .filter((p) => p.data.category === category)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout title={`카테고리: ${category} - My Blog`} description={`${category} 카테고리의 포스트`}>
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <p class="text-slate-500 mb-6">
+      <a href={`${base}blog/`} class="hover:text-slate-700">Blog</a>
+      <span class="mx-2">/</span>
+      <span class="font-medium text-slate-800">카테고리: {category}</span>
+    </p>
+    <h1 class="text-3xl font-bold text-slate-800 mb-8">카테고리: {category}</h1>
+    <div class="grid gap-6 md:grid-cols-2">
+      {posts.map((entry) => (
+        <BlogCard entry={entry} />
+      ))}
+    </div>
+    {posts.length === 0 && (
+      <p class="text-slate-500">이 카테고리에 해당하는 포스트가 없습니다.</p>
+    )}
+  </div>
+</Layout>
