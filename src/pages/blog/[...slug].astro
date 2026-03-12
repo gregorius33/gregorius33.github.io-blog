@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { siteConfig } from '../../site-config';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -21,7 +22,7 @@ const formattedDate = new Intl.DateTimeFormat('ko-KR', {
 }).format(pubDate);
 ---
 
-<Layout title={`${title} - My Blog`} description={description}>
+<Layout title={`${title} - ${siteConfig.siteName}`} description={description}>
   <article class="max-w-3xl mx-auto px-4 py-12">
     <header class="mb-8">
       <span class="text-sm font-medium text-slate-500">{category}</span>

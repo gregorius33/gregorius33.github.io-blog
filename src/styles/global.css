@@ -3,8 +3,18 @@
   @apply prose-headings:font-semibold prose-headings:text-slate-800;
   @apply prose-p:text-slate-600 prose-p:leading-relaxed;
   @apply prose-a:text-slate-700 prose-a:no-underline hover:prose-a:text-slate-900 hover:prose-a:underline;
-  @apply prose-code:bg-slate-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:content-none prose-code:after:content-none;
-  @apply prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-pre:border prose-pre:border-slate-200;
+  @apply prose-code:bg-slate-100 prose-code:text-slate-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:content-none prose-code:after:content-none;
+  @apply prose-pre:bg-slate-800 prose-pre:text-slate-100 prose-pre:border prose-pre:border-slate-700;
   @apply prose-blockquote:border-l-slate-300 prose-blockquote:bg-slate-50 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r;
   @apply prose-ul:marker:text-slate-400 prose-ol:marker:text-slate-400;
+}
+
+/* 코드 블록 내부 텍스트 가독성 */
+.prose pre {
+  background-color: #1e293b !important;
+}
+
+.prose pre code {
+  color: #f1f5f9 !important;
+  background: transparent !important;
 }
