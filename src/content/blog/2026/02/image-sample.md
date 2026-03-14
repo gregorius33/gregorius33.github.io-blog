@@ -22,12 +22,12 @@ category: "기술"
 
 아래는 `public/images/blog/` 폴더에 넣은 이미지입니다.
 
-![블로그 대표 아이콘](/gregorius33.github.io-blog/images/blog/sample.jpg)
+![블로그 대표 아이콘](/MyBlog/images/blog/sample.jpg)
 
 ## 이미지 추가 절차
 
 1. 이미지 파일을 `public/images/blog/` 폴더에 저장
 2. 마크다운에서 위 문법으로 경로 지정
-3. `base` 경로(`/gregorius33.github.io-blog/`)를 앞에 붙여야 합니다
+3. `base` 경로(`/MyBlog/`)를 앞에 붙여야 합니다
 
 이렇게 하면 포스트 안에 이미지가 정상적으로 표시됩니다.

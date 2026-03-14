@@ -2,8 +2,8 @@
 
 Astro 기반 정적 블로그입니다. 마크다운으로 글을 작성하고, GitHub Pages에 호스팅됩니다.
 
-- **배포 URL:** https://gregorius33.github.io/gregorius33.github.io-blog/
-- **저장소:** https://github.com/gregorius33/gregorius33.github.io-blog
+- **배포 URL:** https://gregorius33.github.io/MyBlog/
+- **저장소:** https://github.com/gregorius33/MyBlog
 
 ## 기술 스택
 
@@ -50,7 +50,7 @@ npm install
 npm run dev
 ```
 
-개발 서버: http://localhost:4321/gregorius33.github.io-blog/
+개발 서버: http://localhost:4321/MyBlog/
 
 ## 사이트 설정
 
@@ -98,7 +98,7 @@ category: "카테고리명"
 2. 마크다운에서 다음 문법 사용:
 
 ```markdown
-![이미지 설명](/gregorius33.github.io-blog/images/blog/파일명.jpg)
+![이미지 설명](/MyBlog/images/blog/파일명.jpg)
 ```
 
 ## 빌드 및 테스트

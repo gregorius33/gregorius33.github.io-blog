@@ -14,7 +14,7 @@ category: "일상"
 
 ## 포이동 '지호식'
 
-![지호식](/gregorius33.github.io-blog/images/blog/IMG_2232.jpg)
+![지호식](/MyBlog/images/blog/IMG_2232.jpg)
 
 한 번 가보려고 점찍어 두었던 '지호식'이라는 식당에 가보기로 했다.
 대표 메뉴들을 먹어 보았다.
@@ -23,12 +23,12 @@ category: "일상"
 - 지호식 보따르가(어란) 버터 파스타
 - 티라미수
 
-![숙성회](/gregorius33.github.io-blog/images/blog/IMG_2238.jpeg)
+![숙성회](/MyBlog/images/blog/IMG_2238.jpeg)
 
 거기에 와인도 같이 한 병...
 
-![와인병](/gregorius33.github.io-blog/images/blog/IMG_2235.jpg)
-![와인잔](/gregorius33.github.io-blog/images/blog/IMG_2237.jpg)
+![와인병](/MyBlog/images/blog/IMG_2235.jpg)
+![와인잔](/MyBlog/images/blog/IMG_2237.jpg)
 
 오랜만에 오손도손 여러 이야기들을 나누었다.
 아파서 집에 있는 시간이 많아지니, 아이들과 마주하고 이야기 할 시간이 많아진다.
